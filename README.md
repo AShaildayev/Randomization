@@ -1,42 +1,31 @@
 Randomization
 =============
 
-Script to randomize stimuli
+Script to create stranger to stranger pairs:::
 
 
-Load strangers folder
-load participant SOs folder
+from random import randint
 
-create function to create outputs
-    first output is stranger to stranger pairs
-    second output is each of participant significant other(SO) to stranger pairs
+strangersList = range(1,869)
+nStrangers = len(strangersList) # elements in strangersList
 
-create function to randomize order of strangers
+strangerPairs = []; # start out as empty list
 
-create function to randomize order of participant SOs
+while (len(strangerPairs) < 280):
+	# get two random strangers
+	# randint(a, b) returns integer between a and b
+	stranger1 = strangersList[randint(0, nStrangers-1)]
+	stranger2 = strangersList[randint(0, nStrangers-1)]
+	
+	# if stranger2 == stranger1, keep trying a random stranger
+	# (you don't want the same person to get paired with themself!)
+	while (stranger2 == stranger1):
+		stranger2 = strangersList[randint(0, nStrangers)]
 
+	# add the tuple (stranger1, stranger2) only if it's new
+	if (stranger1, stranger2) not in strangerPairs:
+		strangerPairs.append( (stranger1, stranger2) )
 
-main script:
-
-
-function randomize order of strangers
-
-loop function create output of stranger to stranger pairs until
-    168
-end
-
-loop function create output of SO1 with stranger pairs until
-    20
-end
-
-loop function create output of SO2 with stranger pairs until
-    20
-end
-
-loop function create output of SO3 with stranger pairs until
-    20
-end
-
-loop function create output of SO4 with stranger pairs until
-    20
-end
+print('Generated 280 stranger pairs...')
+for pair in strangerPairs:
+	print(pair)
